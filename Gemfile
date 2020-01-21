@@ -4,6 +4,8 @@ gemspec
 
 group :development, :test do
   gem 'rubocop', '~> 0.74.0'
+  gem 'pry'
+  gem 'dotenv'
 end
 
 group :test do

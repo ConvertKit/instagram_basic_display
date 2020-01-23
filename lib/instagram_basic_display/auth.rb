@@ -37,12 +37,12 @@ module InstagramBasicDisplay
       InstagramBasicDisplay::Response.new(response)
     end
 
-    def long_lived_token(short_lived_access_token:)
+    def long_lived_token(short_lived_token:)
       uri = URI('https://graph.instagram.com/access_token')
       params = {
         client_secret: configuration.client_secret,
         grant_type: 'ig_exchange_token',
-        access_token: short_lived_access_token
+        access_token: short_lived_token
       }
       uri.query = URI.encode_www_form(params)
 

@@ -14,26 +14,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'forwardable'
-require 'instagram_basic_display/auth'
+RSpec.describe InstagramBasicDisplay::Configuration do
+  it 'pulls variables from ENV' do
+    expect(subject.client_id).to eq 'mock_client_id'
+    expect(subject.client_secret).to eq 'mock_secret'
+    expect(subject.redirect_uri).to eq 'mock_redirect_uri'
+  end
 
-module InstagramBasicDisplay
-  class Client
-    extend Forwardable
-
-    def_delegators :@auth, :short_lived_token, :long_lived_token, :refresh_long_lived_token
-
-    def initialize
-      @auth = Auth.new(configuration)
+  context 'when ENV variables are not present' do
+    before { ENV = {}.freeze }
+    it 'raises an error if ENV variables are not present' do
+      expect { subject }.to raise_error KeyError
     end
+  end
 
-    def configuration
-      @configuration ||= InstagramBasicDisplay::Configuration.new
-    end
-
-    def configure
-      yield(configuration) if block_given?
-      nil
-    end
+  it 'allows variables to be overwritten' do
+    subject.client_id = 'different_client_id'
+    expect(subject.client_id).to eq 'different_client_id'
   end
 end

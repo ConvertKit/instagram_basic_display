@@ -29,15 +29,29 @@ module InstagramBasicDisplay
     end
 
     def payload
-      keys = body.keys.map(&:to_sym)
-      Struct.new(*keys).new(*body.values)
+      deserialize_json(body)
     end
 
     def error
-      return unless body['error']
+      return unless body['error'] || body['error_message']
 
-      keys = body['error'].keys.map(&:to_sym)
-      Struct.new(*keys).new(*body['error'].values)
+      error_response = normalize_error(body)
+      deserialize_json(error_response)
+    end
+
+    private
+
+    def normalize_error(error)
+      if error['error_message']
+        error.transform_keys { |key| key.gsub('error_', '') }
+      else
+        error['error']
+      end
+    end
+
+    def deserialize_json(json)
+      keys = json.keys.map(&:to_sym)
+      Struct.new(*keys).new(*json.values)
     end
   end
 end

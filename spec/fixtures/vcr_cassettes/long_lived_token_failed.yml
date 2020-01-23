@@ -1,0 +1,58 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.instagram.com/access_token?access_token=mock_short_lived_token&client_secret=mock_secret&grant_type=ig_exchange_token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - graph.instagram.com
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Www-Authenticate:
+      - OAuth "Facebook Platform" "invalid_token" "Invalid OAuth access token."
+      Strict-Transport-Security:
+      - max-age=15552000
+      Pragma:
+      - no-cache
+      X-Fb-Rev:
+      - '1001632639'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-store
+      X-Fb-Trace-Id:
+      - B52aZufENQo
+      X-Fb-Request-Id:
+      - AeMGbeYdBX0QgHM_4uAZ6Rd
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Debug:
+      - Wqjhe6n0EcNvoAcrJBC31N8iKA/RoKssoUcl3zSEIUJL6qFlQxTUjVr6PHM7ysNl9gYn9pEjPoVZshBz7y9CJA==
+      Date:
+      - Thu, 23 Jan 2020 10:01:55 GMT
+      X-Fb-Trip-Id:
+      - '780166575'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '125'
+    body:
+      encoding: UTF-8
+      string: '{"error":{"message":"Invalid OAuth access token.","type":"OAuthException","code":190,"fbtrace_id":"AeMGbeYdBX0QgHM_4uAZ6Rd"}}'
+    http_version:
+  recorded_at: Thu, 23 Jan 2020 10:01:47 GMT
+recorded_with: VCR 5.0.0

@@ -14,8 +14,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'instagram_basic_display/version'
-require 'instagram_basic_display/client'
-
-module InstagramBasicDisplay
-end

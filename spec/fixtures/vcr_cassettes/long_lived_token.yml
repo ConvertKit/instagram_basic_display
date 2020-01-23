@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.instagram.com/access_token?access_token=mock_short_lived_token&client_secret=mock_secret&grant_type=ig_exchange_token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - graph.instagram.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"cd658113571b43803ea3ead67cb07eb959925764"'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Instagram-Api-Version:
+      - v1.0
+      Strict-Transport-Security:
+      - max-age=15552000
+      Pragma:
+      - no-cache
+      X-Fb-Rev:
+      - '1001632709'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      X-Fb-Trace-Id:
+      - Bh2hwc2x4Rx
+      X-Fb-Request-Id:
+      - AByoB0z4DCzhCQ9UT7pOZwf
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Debug:
+      - 5ORw+LvWbPWma+RDV2wJ22gM/SMGfb/m0CZorLNQFiHlq8Fy7u4g6f/NiuxRtj71H8/ETuoEG4gCOuGkq3hKGg==
+      Date:
+      - Thu, 23 Jan 2020 09:55:51 GMT
+      X-Fb-Trip-Id:
+      - '1425083115'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '206'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"mock_long_lived_token","token_type":"bearer","expires_in":5184000}'
+    http_version:
+  recorded_at: Thu, 23 Jan 2020 09:55:44 GMT
+recorded_with: VCR 5.0.0

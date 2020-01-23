@@ -1,16 +1,16 @@
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "instagram_basic_display_client/version"
+require "instagram_basic_display/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "instagram_basic_display_client"
-  spec.version       = InstagramBasicDisplayClient::VERSION
+  spec.name          = "instagram_basic_display"
+  spec.version       = InstagramBasicDisplay::VERSION
   spec.authors       = ["ConvertKit, LLC"]
   spec.email         = ["engineering@convertkit.com"]
 
   spec.summary       = %q{A ruby wrapper for the Instagram Basic Display API}
   spec.description   = %q{A ruby wrapper for the Instagram Basic Display API}
-  spec.homepage      = "https://github.com/ConvertKit/instagram_basic_display_client"
+  spec.homepage      = "https://github.com/ConvertKit/instagram_basic_display"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.

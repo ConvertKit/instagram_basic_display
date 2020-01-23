@@ -1,0 +1,86 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.instagram.com/oauth/access_token
+    body:
+      encoding: US-ASCII
+      string: client_id=mock_data&client_secret=mock_data&grant_type=mock_data&redirect_uri=mock_data
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.instagram.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Ig-Set-Password-Encryption-Web-Key-Id:
+      - mock_data
+      Ig-Set-Password-Encryption-Web-Pub-Key:
+      - mock_data
+      Vary:
+      - Accept-Language, Cookie
+      Content-Language:
+      - en
+      Date:
+      - Thu, 23 Jan 2020 09:46:40 GMT
+      - Thu, 23 Jan 2020 09:46:40 GMT
+      Strict-Transport-Security:
+      - max-age=31536000
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Frame-Options:
+      - SAMEORIGIN
+      Content-Security-Policy:
+      - 'report-uri https://www.instagram.com/security/csp_report/; default-src ''self''
+        https://www.instagram.com; img-src https: data: blob:; font-src https: data:;
+        media-src ''self'' blob: https://www.instagram.com https://*.cdninstagram.com
+        https://*.fbcdn.net; manifest-src ''self'' https://www.instagram.com; script-src
+        ''self'' https://instagram.com https://www.instagram.com https://*.www.instagram.com
+        https://*.cdninstagram.com wss://www.instagram.com https://*.facebook.com
+        https://*.fbcdn.net https://*.facebook.net ''unsafe-inline'' ''unsafe-eval''
+        blob:; style-src ''self'' https://*.www.instagram.com https://www.instagram.com
+        ''unsafe-inline''; connect-src ''self'' https://instagram.com https://www.instagram.com
+        https://*.www.instagram.com https://graph.instagram.com https://*.graph.instagram.com
+        https://*.cdninstagram.com https://api.instagram.com wss://www.instagram.com
+        wss://edge-chat.instagram.com https://*.facebook.com https://*.fbcdn.net https://*.facebook.net
+        chrome-extension://boadgeojelhgndaghljhdicfkmllpafd blob:; worker-src ''self''
+        blob: https://www.instagram.com; frame-src ''self'' https://instagram.com
+        https://www.instagram.com https://staticxx.facebook.com https://www.facebook.com
+        https://web.facebook.com https://connect.facebook.net https://m.facebook.com;
+        object-src ''none''; upgrade-insecure-requests'
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Aed:
+      - '15'
+      Access-Control-Expose-Headers:
+      - X-IG-Set-WWW-Claim
+      X-Fb-Trip-Id:
+      - '780166575'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '92'
+    body:
+      encoding: UTF-8
+      string: '{"error_type": "OAuthException", "code": 400, "error_message": "Invalid
+        authorization code"}'
+    http_version:
+  recorded_at: Thu, 23 Jan 2020 09:46:33 GMT
+recorded_with: VCR 5.0.0

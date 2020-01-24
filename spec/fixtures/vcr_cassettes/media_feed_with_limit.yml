@@ -1,0 +1,62 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.instagram.com/me/media?access_token=mock_token&fields=id,media_url&limit=2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - graph.instagram.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Vary:
+      - Accept-Encoding
+      Etag:
+      - '"d9d05747c263ca86ce8d434102f28823b9d71652"'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Instagram-Api-Version:
+      - v1.0
+      Strict-Transport-Security:
+      - max-age=15552000
+      Pragma:
+      - no-cache
+      X-Fb-Rev:
+      - '1001637325'
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      X-Fb-Trace-Id:
+      - CX2VmrNsmi0
+      X-Fb-Request-Id:
+      - ACqycdP3IpuYQipQCCvDpfn
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Debug:
+      - bD8kaOSRxhS/xGayf+/uV789wy73UhLcsNFOnGAaXb7IoKTcg7+wea5BMRWO10bfFUjOXcQkub4UAA4yvMfY/w==
+      Date:
+      - Fri, 24 Jan 2020 08:49:16 GMT
+      X-Fb-Trip-Id:
+      - '780166575'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '836'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"id":"18046145275219342","media_url":"https:\/\/scontent.xx.fbcdn.net\/v\/t51.2885-15\/80769038_459707698238281_2210237389747041331_n.jpg?_nc_cat=105&_nc_oc=AQk2QxolTenikrniQSGHh7lWpdgNRvK1rOxgsOKAJDND3ChQ-Iko83U2ccJFM-CRRl8&_nc_ht=scontent.xx&oh=1289510c711f947f4c87d7aac5f2af9b&oe=5E9C6DD0"},{"id":"17897610976424901","media_url":"https:\/\/scontent.xx.fbcdn.net\/v\/t51.2885-15\/74717212_160125968596175_8546874783107473912_n.jpg?_nc_cat=107&_nc_oc=AQkychzttmKE0e_xUrfNndD01YjMETsraQRZo2dcKhGAs1GlExeolPv9PmOCc4biuOY&_nc_ht=scontent.xx&oh=0c24029de985d02d20263edbf0811f9a&oe=5ED7A0E6"}],"paging":{"cursors":{"before":"QVFIUnZAWaGxTQjg0Q05xbVUteVFpWHA2NzJ3ZA041cUhXbmV3ckx0WFJuU214Y1NXOHRfV3VRc2pQX21ZAWThJSmdld1ljQTlFeUlYQ1pwZAXpIWXkyVko5aW9R","after":"QVFIUnNVSFlkNnl0Y3ZAoNTlYRDJWdWtoaGpzTlljV0YxUDhjdW1nUkFkamxMYnEzLTJkMjFqSnNEYkRTc1ZAPN0stM3h5TW9WQ2l5RV90YmN4WUF0WW4tbER3"},"next":"https:\/\/graph.instagram.com\/v1.0\/17841401262973589\/media?access_token=IGQVJVZAEE5R3BpVmhEUi1WSEVaNVNNeDF1RHlwYXpNcjg3SnFsV1BvVGN3S3pSakNJN3VtNVZABM3BCM1VDWlNqUDNNX29xQzU2dmNSWDhuWVhDTkNqV3hJa25vSkdkTUVfdVB1ek13&fields=id\u00252Cmedia_url&limit=2&after=QVFIUnNVSFlkNnl0Y3ZAoNTlYRDJWdWtoaGpzTlljV0YxUDhjdW1nUkFkamxMYnEzLTJkMjFqSnNEYkRTc1ZAPN0stM3h5TW9WQ2l5RV90YmN4WUF0WW4tbER3"}}'
+    http_version: 
+  recorded_at: Fri, 24 Jan 2020 08:49:09 GMT
+recorded_with: VCR 5.0.0

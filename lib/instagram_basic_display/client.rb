@@ -33,8 +33,9 @@ module InstagramBasicDisplay
     end
 
     def next_page(response)
-      return unless (uri = URI(response.paging['next']))
+      return unless response.more_results?
 
+      uri = URI(response.paging['next']))
       response = Net::HTTP.get_response(uri)
       InstagramBasicDisplay::Response.new(response)
     end

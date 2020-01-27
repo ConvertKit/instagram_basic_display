@@ -16,12 +16,17 @@
 
 module InstagramBasicDisplay
   class Response
-    attr_reader :status, :body, :response
+    attr_reader :status, :body, :response, :paging
 
     def initialize(response)
       @response = response
       @body = JSON.parse(response.body)
       @status = response.code
+      @paging = @body['paging']
+    end
+
+    def more_results?
+      paging['next'].present?
     end
 
     def success?

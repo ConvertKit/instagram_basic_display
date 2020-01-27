@@ -16,19 +16,24 @@
 
 require 'forwardable'
 require 'instagram_basic_display/auth'
+require 'instagram_basic_display/profile'
 
 module InstagramBasicDisplay
   class Client
     extend Forwardable
 
     def_delegators :@auth, :short_lived_token, :long_lived_token, :refresh_long_lived_token
+    def_delegators :@profile, :profile, :media_feed, :media_node
 
-    def initialize
+    def initialize(auth_token: nil)
+      @auth_token = auth_token
+
       @auth = Auth.new(configuration)
+      @profile = Profile.new(configuration)
     end
 
     def configuration
-      @configuration ||= InstagramBasicDisplay::Configuration.new
+      @configuration ||= InstagramBasicDisplay::Configuration.new(auth_token: @auth_token)
     end
 
     def configure

@@ -22,9 +22,11 @@ RSpec.describe InstagramBasicDisplay::Configuration do
   end
 
   context 'when ENV variables are not present' do
-    before { ENV = {}.freeze }
     it 'raises an error if ENV variables are not present' do
+      populated_env = ENV
+      ENV = {}.freeze
       expect { subject }.to raise_error KeyError
+      ENV = populated_env
     end
   end
 

@@ -38,7 +38,6 @@ module InstagramBasicDisplay
       make_request(uri, params)
     end
 
-    # figure out pagination
     # document that you can add a limit here
     def media_feed(user_id: nil, fields: %i[id media_url], **params)
       check_for_auth_token!(params)

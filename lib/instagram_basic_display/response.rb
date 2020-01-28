@@ -25,16 +25,12 @@ module InstagramBasicDisplay
       @paging = @body['paging']
     end
 
-    def more_results?
-      paging['next'].present?
+    def next_page_link
+      paging['next']
     end
 
-    def next_page
-      return unless more_results?
-
-      uri = URI(paging['next']))
-      next_response = Net::HTTP.get_response(uri)
-      InstagramBasicDisplay::Response.new(next_response)
+    def previous_page_link
+      paging['previous']
     end
 
     def success?

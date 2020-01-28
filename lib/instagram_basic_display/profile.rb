@@ -38,7 +38,6 @@ module InstagramBasicDisplay
       make_request(uri, params)
     end
 
-    # figure out pagination
     # document that you can add a limit here
     def media_feed(user_id: nil, fields: %i[id media_url], **params)
       check_for_auth_token!(params)
@@ -51,6 +50,11 @@ module InstagramBasicDisplay
       }
 
       make_request(uri, params)
+    end
+
+    def media_feed_from_link(page_link:)
+      uri = URI(page_link)
+      make_request(uri)
     end
 
     def media_node(media_id:, fields: %i[id media_url], **params)
@@ -68,7 +72,7 @@ module InstagramBasicDisplay
 
     private
 
-    def make_request(uri, params)
+    def make_request(uri, params={})
       uri.query = URI.encode_www_form(params)
       response = Net::HTTP.get_response(uri)
       InstagramBasicDisplay::Response.new(response)

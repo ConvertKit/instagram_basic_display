@@ -32,14 +32,6 @@ module InstagramBasicDisplay
       @profile = Profile.new(configuration)
     end
 
-    def next_page(response)
-      return unless response.more_results?
-
-      uri = URI(response.paging['next']))
-      response = Net::HTTP.get_response(uri)
-      InstagramBasicDisplay::Response.new(response)
-    end
-
     def configuration
       @configuration ||= InstagramBasicDisplay::Configuration.new(auth_token: @auth_token)
     end

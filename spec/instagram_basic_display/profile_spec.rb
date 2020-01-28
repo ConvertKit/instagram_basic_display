@@ -87,6 +87,23 @@ RSpec.describe InstagramBasicDisplay::Profile do
     end
   end
 
+  describe '#media_feed_from_link' do
+    it "returns a list of the user\'s media from the given link" do
+      VCR.use_cassette('media_feed') do
+        response = subject.media_feed
+
+        VCR.use_cassette('media_feed_from_link') do
+          next_response = subject.media_feed_from_link(page_link: response.next_page_link)
+
+          expect(next_response.success?).to eq true
+          expect(next_response.payload.data).to be_a Array
+          expect(next_response.payload.data.length > 1).to eq true
+          expect(next_response.error).to eq nil
+        end
+      end
+    end
+  end
+
   describe '#media_node' do
     it 'returns information for the given media' do
       VCR.use_cassette('media_node') do

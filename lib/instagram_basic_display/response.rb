@@ -22,23 +22,23 @@ module InstagramBasicDisplay
       @response = response
       @body = JSON.parse(response.body)
       @status = response.code
-      @paging = @body['paging']
+      @paging = body['paging']
     end
 
     def next_page?
-      next_page_link.present?
+      !next_page_link.nil?
     end
 
     def previous_page?
-      previous_page_link.present?
+      !previous_page_link.nil?
     end
 
     def next_page_link
-      paging['next']
+      paging['next'] if paging
     end
 
     def previous_page_link
-      paging['previous']
+      paging['previous'] if paging
     end
 
     def success?

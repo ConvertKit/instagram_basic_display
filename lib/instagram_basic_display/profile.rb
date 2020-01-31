@@ -42,7 +42,7 @@ module InstagramBasicDisplay
     def media_feed(user_id: nil, fields: %i[id media_url], **params)
       check_for_auth_token!(params)
 
-      uri = URI(base_profile_uri(user_id: user_id) + '/media') # join that nicer
+      uri = URI(base_profile_uri(user_id: user_id) + '/media')
       params = {
         fields: fields.map(&:to_s).join(','),
         access_token: configuration.auth_token,
@@ -72,7 +72,7 @@ module InstagramBasicDisplay
 
     private
 
-    def make_request(uri, params={})
+    def make_request(uri, params = {})
       uri.query = URI.encode_www_form(params)
       response = Net::HTTP.get_response(uri)
       InstagramBasicDisplay::Response.new(response)

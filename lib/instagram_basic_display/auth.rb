@@ -37,7 +37,9 @@ module InstagramBasicDisplay
       InstagramBasicDisplay::Response.new(response)
     end
 
-    def long_lived_token(short_lived_token:)
+    def long_lived_token(short_lived_token: nil, access_code: nil)
+      short_lived_token ||= short_lived_token(access_code: access_code).payload.access_token
+
       uri = URI('https://graph.instagram.com/access_token')
       params = {
         client_secret: configuration.client_secret,

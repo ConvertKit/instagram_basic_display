@@ -27,7 +27,7 @@ RSpec.describe InstagramBasicDisplay::Auth do
         response = subject.short_lived_token(access_code: 'asdf')
 
         expect(response).to be_a InstagramBasicDisplay::Response
-        expect(response.payload.access_token).to eq 'mock_access_token'
+        expect(response.payload.access_token).to eq 'mock_short_lived_token'
         expect(response.payload.user_id).to eq 1234567
         expect(response.success?).to eq true
       end
@@ -47,6 +47,20 @@ RSpec.describe InstagramBasicDisplay::Auth do
   end
 
   describe '#long_lived_token' do
+    it 'exchanges an access code for a short lived token, then a long lived token' do
+      VCR.use_cassette('short_lived_token') do
+        VCR.use_cassette('long_lived_token') do
+          response = subject.long_lived_token(access_code: 'asdf')
+
+          expect(response).to be_a InstagramBasicDisplay::Response
+          expect(response.payload.access_token).to eq 'mock_long_lived_token'
+          expect(response.payload.expires_in).not_to be_nil
+          expect(response.payload.token_type).to eq 'bearer'
+          expect(response.success?).to eq true
+        end
+      end
+    end
+
     it 'exchanges a short lived token for a long lived token' do
       VCR.use_cassette('long_lived_token') do
         response = subject.long_lived_token(short_lived_token: 'mock_short_lived_token')

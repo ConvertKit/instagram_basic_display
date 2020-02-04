@@ -79,7 +79,7 @@ http_interactions:
       - '218'
     body:
       encoding: ASCII-8BIT
-      string: '{"access_token": "mock_access_token",
+      string: '{"access_token": "mock_short_lived_token",
         "user_id": 1234567 }'
     http_version:
   recorded_at: Thu, 23 Jan 2020 09:40:12 GMT

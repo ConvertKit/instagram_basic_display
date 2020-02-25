@@ -23,7 +23,7 @@ module InstagramBasicDisplay
     extend Forwardable
 
     def_delegators :@auth, :short_lived_token, :long_lived_token, :refresh_long_lived_token
-    def_delegators :@profile, :profile, :media_feed, :media_node
+    def_delegators :@profile, :profile, :media_feed, :media_node, :media_feed_from_link
 
     def initialize(auth_token: nil)
       @auth_token = auth_token

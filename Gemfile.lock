@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    instagram_basic_display (0.1.0.pre.rc1)
+    instagram_basic_display (0.1.1)
 
 GEM
   remote: https://rubygems.org/

@@ -39,10 +39,15 @@ module InstagramBasicDisplay
     end
 
     # document that you can add a limit here
-    def media_feed(user_id: nil, fields: %i[id media_url], **params)
+    def media_feed(user_id: nil, fields: %i[id media_url], paginated_url: nil, **params)
       check_for_auth_token!(params)
 
-      uri = URI(base_profile_uri(user_id: user_id) + '/media')
+      uri = if paginated_url
+              URI(paginated_url)
+            else
+              URI(base_profile_uri(user_id: user_id) + '/media')
+            end
+
       params = {
         fields: fields.map(&:to_s).join(','),
         access_token: configuration.auth_token,
@@ -52,10 +57,6 @@ module InstagramBasicDisplay
       make_request(uri, params)
     end
 
-    def media_feed_from_link(page_link:)
-      uri = URI(page_link)
-      make_request(uri)
-    end
 
     def media_node(media_id:, fields: %i[id media_url], **params)
       check_for_auth_token!(params)
@@ -73,7 +74,8 @@ module InstagramBasicDisplay
     private
 
     def make_request(uri, params = {})
-      uri.query = URI.encode_www_form(params)
+      uri.query = consolidate_query_string(uri, params)
+
       response = Net::HTTP.get_response(uri)
       InstagramBasicDisplay::Response.new(response)
     end
@@ -87,6 +89,18 @@ module InstagramBasicDisplay
 
     def base_profile_uri(user_id: nil)
       "https://graph.instagram.com/#{user_id || 'me'}"
+    end
+
+    def consolidate_query_string(uri, params = {})
+      parsed_query_string = uri.query.to_s
+                               .split('&')
+                               .map { |pair| pair.split('=') }
+                               .to_h
+
+      params = params.transform_keys(&:to_s)
+      params = parsed_query_string.merge(params)
+
+      URI.encode_www_form(params)
     end
 
     attr_reader :configuration

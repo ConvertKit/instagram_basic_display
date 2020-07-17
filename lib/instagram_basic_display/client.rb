@@ -19,12 +19,22 @@ require 'instagram_basic_display/auth'
 require 'instagram_basic_display/profile'
 
 module InstagramBasicDisplay
+  # Exposes all the functionality of the gem, so that you can interact with the Instagram API.
+  # Methods are defined in separate modules, but delegated here for simplicity when interacting
+  # with the gem.
   class Client
     extend Forwardable
 
     def_delegators :@auth, :short_lived_token, :long_lived_token, :refresh_long_lived_token
     def_delegators :@profile, :profile, :media_feed, :media_node, :media_feed_from_link
 
+    # Constructor method
+    #
+    # @param auth_token [String] optionally pass an auth token that will be used to
+    # make requests. If you do not have a token, you can retrieve one by using the
+    # authentication utilities provided.
+    #
+    # @return void
     def initialize(auth_token: nil)
       @auth_token = auth_token
 
@@ -32,10 +42,19 @@ module InstagramBasicDisplay
       @profile = Profile.new(configuration)
     end
 
+    # Configuration that will be used to make requests against the Instagram API:
+    # redirect_uri, client secret, and client ID. These are automatically picked up from
+    # environment variables. Optionally, you can pass an auth token which will be used
+    # to make requests.
+    #
+    # @return [InstagramBasicDisplay::Configuration]
     def configuration
       @configuration ||= InstagramBasicDisplay::Configuration.new(auth_token: @auth_token)
     end
 
+    # Sets the gem's configuration
+    #
+    # @return void
     def configure
       yield(configuration) if block_given?
       nil

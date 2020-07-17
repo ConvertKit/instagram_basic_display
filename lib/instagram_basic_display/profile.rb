@@ -20,11 +20,37 @@ require 'instagram_basic_display/response'
 require 'instagram_basic_display/errors'
 
 module InstagramBasicDisplay
+  # Module for interacting with an Instagram user's profile. You can retrieve profile information
+  #  and media.
   class Profile
+    # Constructor
+    #
+    # @param configuration [InstagramBasicDisplay::Configuration] the configuration
+    #   information to use when making requests to Instagram.
+    #
+    # @return void
     def initialize(configuration)
       @configuration = configuration
     end
 
+    # Method for interacting with an Instagram user's profile. Can be used to retrieve
+    #   information such as their id and username.
+    #
+    # @param user_id [String] the id of the user whose information you are retrieving.
+    #   If no user_id is passed, the query will be made agains the user associated with the
+    #   current auth token.
+    #
+    # @param fields [Array<Symbol>] array of fields to retrieve. Defaults to id and username.
+    #   The full list of fields can be found in the Instagram documentation:
+    #   https://developers.facebook.com/docs/instagram-basic-display-api/reference/user#fields
+    #
+    # @param params [Hash] any additional request parameters that should be passed to the API.
+    #
+    # @return [InstagramBasicDisplay::Response] a response object containing the response from
+    #   the Instagram API.
+    #
+    # @raise [InstagramBasicDisplay::NoAuthToken] raises when no auth token is provided in the
+    #  client configuration
     def profile(user_id: nil, fields: %i[id username], **params)
       check_for_auth_token!(params)
 
@@ -38,7 +64,23 @@ module InstagramBasicDisplay
       make_request(uri, params)
     end
 
-    # document that you can add a limit here
+    # Method for retrieving a user's media feed.
+    #
+    # @param user_id [String] the id of the user whose information you are retrieving.
+    #   If no user_id is passed, the query will be made agains the user associated with the
+    #   current auth token.
+    #
+    # @param fields [Array<Symbol>] array of fields to retrieve. Defaults to id and media_url.
+    #   The full list of fields can be found in the Instagram documentation:
+    #   https://developers.facebook.com/docs/instagram-basic-display-api/reference/media/
+    #
+    # @param paginated_url [String] a url to retrieve the next or previous set of results
+    #   from the API. This url is provided by the response from Instagram.
+    #
+    # @param params [Hash] any additional request parameters that should be passed to the API
+    #
+    # @raise [InstagramBasicDisplay::NoAuthToken] raises when no auth token is provided in the
+    #  client configuration
     def media_feed(user_id: nil, fields: %i[id media_url], paginated_url: nil, **params)
       check_for_auth_token!(params)
 
@@ -57,7 +99,18 @@ module InstagramBasicDisplay
       make_request(uri, params)
     end
 
-
+    # Method for retrieving information for a particular media node (i.e. one image or video).
+    #
+    # @param media_id [String] the id of the media you are querying for.
+    #
+    # @param fields [Array<Symbol>] array of fields to retrieve. Defaults to id and media_url.
+    #   The full list of fields can be found in the Instagram documentation:
+    #   https://developers.facebook.com/docs/instagram-basic-display-api/reference/media/
+    #
+    # @param params [Hash] any additional request parameters that should be passed to the API
+    #
+    # @raise [InstagramBasicDisplay::NoAuthToken] raises when no auth token is provided in the
+    #  client configuration
     def media_node(media_id:, fields: %i[id media_url], **params)
       check_for_auth_token!(params)
 

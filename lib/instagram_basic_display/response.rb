@@ -18,6 +18,10 @@ module InstagramBasicDisplay
   class Response
     attr_reader :status, :body, :response, :paging
 
+    # Constructor
+    # @param response [String] raw JSON repsonse from the Instagram API
+    #
+    # @return void
     def initialize(response)
       @response = response
       @body = JSON.parse(response.body)
@@ -25,30 +29,44 @@ module InstagramBasicDisplay
       @paging = body['paging']
     end
 
+    # Returns whether or not a next page of results from the Instagram API is available
+    # @return [Boolean]
     def next_page?
       !next_page_link.nil?
     end
 
+    # Returns whether or not a previous page of results from the Instagram API is available
+    # @return [Boolean]
     def previous_page?
       !previous_page_link.nil?
     end
 
+    # Returns a link to the next page of results from the Instagram API
+    # @return [String]
     def next_page_link
       paging['next'] if paging
     end
 
+    # Returns a link to the previous page of results from the Instagram API
+    # @return [String]
     def previous_page_link
       paging['previous'] if paging
     end
 
+    # Returns whether the request to the Instagram API was a success
+    # @return [Boolean]
     def success?
       response.message == 'OK'
     end
 
+    # Returns the raw payload from Instagram's API deserialized into a Struct
+    # @return [Struct]
     def payload
       deserialize_json(body)
     end
 
+    # If an error is returned from the Instagram API, returns it as a Struct
+    # @return [Nil, Struct]
     def error
       return unless body['error'] || body['error_message']
 

@@ -32,8 +32,6 @@ module InstagramBasicDisplay
       @auth_token = auth_token
     end
 
-    private
-
     def set_client_id
       ENV.fetch('INSTAGRAM_CLIENT_ID')
     end

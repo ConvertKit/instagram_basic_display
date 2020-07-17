@@ -19,11 +19,31 @@ require 'instagram_basic_display/configuration'
 require 'instagram_basic_display/response'
 
 module InstagramBasicDisplay
+  # A module to handle authentication requests to the Instagram API. Allows you to retrieve
+  # short- and long-lived tokens, and refresh long-lived tokens.
+  #
+  # Does not handle retrieving access codes. These must be retrieved by implementing Instagram's
+  #  authentication window.
+  #  https://developers.facebook.com/docs/instagram-basic-display-api/overview#authentication-window
   class Auth
+    # Constructor
+    #
+    # @param configuration [InstagramBasicDisplay::Configuration] configuration information
+    #   that should be used to make requests against the Instagram API.
+    #
+    # @return void
     def initialize(configuration)
       @configuration = configuration
     end
 
+    # Exchanges an access code for a _short-lived_ access token. A short-lived token is valid
+    # for one hour, but can be exchanged for a long-lived token. Refer to Instagram's documentation.
+    # https://developers.facebook.com/docs/instagram-basic-display-api/overview#short-lived-access-tokens
+    #
+    # @param access_code [String] A code retrieved by implementing Instagram's authentication window
+    #   flow: https://developers.facebook.com/docs/instagram-basic-display-api/overview#authentication-window
+    #
+    # @return [InstagramBasicDisplay::Response] a response object containing either the token or an error
     def short_lived_token(access_code:)
       response = Net::HTTP.post_form(
         URI('https://api.instagram.com/oauth/access_token'),
@@ -37,6 +57,13 @@ module InstagramBasicDisplay
       InstagramBasicDisplay::Response.new(response)
     end
 
+    # Exchanges _either_ an access code OR a short-lived token for a long-lived token.
+    #  If an access code is passed, it will first be exchanged for a short-lived token.
+    #  Once that is achieved, the short-lived token will be exchanged for a long-lived token.
+    #  Refer to Instagram's documentation for more information on tokens:
+    #  https://developers.facebook.com/docs/instagram-basic-display-api/overview
+    #
+    # @return [InstagramBasicDisplay::Response] a response object containing either the token or an error
     def long_lived_token(short_lived_token: nil, access_code: nil)
       short_lived_token ||= short_lived_token(access_code: access_code).payload.access_token
 
@@ -52,6 +79,9 @@ module InstagramBasicDisplay
       InstagramBasicDisplay::Response.new(response)
     end
 
+    # Refreshes a long-lived token for a new period of validity.
+    #
+    # @return [InstagramBasicDisplay::Response] a response object containing either the token or an error
     def refresh_long_lived_token(token:)
       uri = URI('https://graph.instagram.com/refresh_access_token')
       params = {

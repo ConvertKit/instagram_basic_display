@@ -15,9 +15,16 @@
 # limitations under the License.
 
 module InstagramBasicDisplay
+  # Holds configuration values that are used to make requests against the
+  # Instagram API
   class Configuration
     attr_accessor :client_id, :client_secret, :redirect_uri, :auth_token
 
+    # Constructor method
+    #
+    # @param auth_token [String] token that will be used to make requests
+    #
+    # @return void
     def initialize(auth_token: nil)
       @client_id = set_client_id
       @client_secret = set_client_secret

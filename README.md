@@ -102,7 +102,7 @@ else
 end
 ```
 
-You can refresh a long-lived token so that it remains valid for another period (at this stage, Instagram have set the validity period to 90 days).
+You can refresh a long-lived token so that it remains valid for another period (at this stage, Instagram have set the validity period to 60 days).
 
 ```ruby
 user = User.first

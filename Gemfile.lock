@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    instagram_basic_display (0.2.0)
+    instagram_basic_display (0.3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -59,7 +59,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.16)
+  bundler
   dotenv
   instagram_basic_display!
   pry

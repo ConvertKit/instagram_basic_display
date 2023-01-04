@@ -25,8 +25,8 @@ module InstagramBasicDisplay
     # @param auth_token [String] token that will be used to make requests
     #
     # @return void
-    def initialize(auth_token: nil, opts = {})
-      @auth_token = auth_token
+    def initialize(opts = {})
+      @auth_token = opts[:auth_token]
       @client_id = opts[:client_id] || set_client_id
       @client_secret = opts[:client_secret] || set_client_secret
       @redirect_uri = opts[:redirect_uri] || set_redirect_uri

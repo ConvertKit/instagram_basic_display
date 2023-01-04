@@ -35,8 +35,8 @@ module InstagramBasicDisplay
     # authentication utilities provided.
     #
     # @return void
-    def initialize(auth_token: nil, opts = {})
-      @auth_token = auth_token
+    def initialize(opts = {})
+      @auth_token = opts[:auth_token]
       @opts = opts
 
       @auth = Auth.new(configuration)
@@ -50,7 +50,7 @@ module InstagramBasicDisplay
     #
     # @return [InstagramBasicDisplay::Configuration]
     def configuration
-      @configuration ||= InstagramBasicDisplay::Configuration.new(auth_token: @auth_token, @opts)
+      @configuration ||= InstagramBasicDisplay::Configuration.new(@opts)
     end
 
     # Sets the gem's configuration
